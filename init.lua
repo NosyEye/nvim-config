@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -120,6 +120,13 @@ end)
 
 -- Enable break indent
 vim.opt.breakindent = true
+
+vim.opt.smartindent = false
+
+-- Insert spaces for tabs
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.o.expandtab = true
 
 -- Save undo history
 vim.opt.undofile = true
@@ -229,7 +236,7 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  --'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -637,6 +644,13 @@ require('lazy').setup({
               completion = {
                 callSnippet = 'Replace',
               },
+              format = {
+                enable = true,
+                defaultConfig = {
+                  indent_style = 'space',
+                  indent_size = '4',
+                }
+              }
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
             },
@@ -708,7 +722,7 @@ require('lazy').setup({
         }
       end,
       formatters_by_ft = {
-        lua = { 'stylua' },
+        --lua = { 'stylua' }, disabled because it inserted tabs
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -845,7 +859,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'tokyonight-storm'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -948,21 +962,22 @@ require('lazy').setup({
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
-    },
+    icons = {},
+    --icons = vim.g.have_nerd_font and {} or {
+    --  cmd = '⌘',
+    --  config = '🛠',
+    --  event = '📅',
+    --  ft = '📂',
+    --  init = '⚙',
+    -- keys = '🗝',
+    --  plugin = '🔌',
+    --  runtime = '💻',
+    -- require = '🌙',
+    --  source = '📄',
+    --  start = '🚀',
+    --  task = '📌',
+    --  lazy = '💤 ',
+    --},
   },
 })
 
